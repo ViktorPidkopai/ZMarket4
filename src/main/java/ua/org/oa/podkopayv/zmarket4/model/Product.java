@@ -1,10 +1,23 @@
 package ua.org.oa.podkopayv.zmarket4.model;
 
+import javax.persistence.*;
 
+@Entity
+@Table(name = "product")
 public class Product {
+
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Column(name = "category")
     private String category;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "price")
     private int price;
 
     public Product() { }

@@ -45,7 +45,7 @@
     $(document).ready(function () {
         $('#pets').click(function () {
             console.log("PETS btn clicked.");
-            $.getJSON("api/pet", function (data) {
+            $.getJSON("rest/product", function (data) {
                 paintTable(data);
             });
         });
@@ -153,7 +153,7 @@
                 '<td><button type="button" class="btn btn-success" id="add_btn" disabled><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>&emsp;Add</button></td>' +
                 '</tr></tbody>';
         $.each(data, function (index, value) {
-            console.log("index = " + admin);
+            console.log("index = " + index);
             console.log("value = " + value);
             tableBody += '<tr><td>' + value.id + '</td>' +
                     '<td>' + value.name + '</td>' +

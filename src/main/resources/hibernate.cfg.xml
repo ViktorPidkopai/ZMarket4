@@ -14,6 +14,5 @@
         <property name="hbm2ddl.auto">validate</property>
 
         <mapping class="ua.org.oa.podkopayv.zmarket4.model.Product" />
-
     </session-factory>
 </hibernate-configuration>

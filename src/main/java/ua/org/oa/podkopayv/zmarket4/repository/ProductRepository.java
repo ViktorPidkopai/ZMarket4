@@ -6,14 +6,14 @@ import java.util.List;
 
 public interface ProductRepository {
 
-    void create();
-    void update();
-    void delete();
-    Product getById();
+    void create(Product product);
+    void update(Product product);
+    void delete(Product product);
+    Product getById(long id);
     List<Product> getAll();
-    List<Product> getByPriceRange();
-    List<Product> getByCategory();
-    List<Product> getByName();
+    List<Product> getByPriceRange(int minPrice, int maxPrice);
+    List<Product> getByCategory(String category);
+    List<Product> getByName(String name);
     List<String> getCategories();
 
 }

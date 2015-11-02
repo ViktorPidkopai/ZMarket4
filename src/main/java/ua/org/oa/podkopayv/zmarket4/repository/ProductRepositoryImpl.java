@@ -1,7 +1,10 @@
 package ua.org.oa.podkopayv.zmarket4.repository;
 
 
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ua.org.oa.podkopayv.zmarket4.model.Product;
 
@@ -11,7 +14,7 @@ import java.util.List;
 @Repository("productRepository")
 public class ProductRepositoryImpl implements ProductRepository {
 
-//    @Autowired
+    @Autowired
     private final SessionFactory sessionFactory;
 
     public ProductRepositoryImpl(SessionFactory sessionFactory) {
@@ -19,48 +22,82 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
-    public void create() {
-
+    public void create(Product product) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        session.save(product);
+        session.getTransaction().commit();
     }
 
     @Override
-    public void update() {
-
+    public void update(Product product) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        session.update(product);
+        session.getTransaction().commit();
     }
 
     @Override
-    public void delete() {
-
+    public void delete(Product product) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        session.delete(product);
+        session.getTransaction().commit();
     }
 
     @Override
 //    @Transactional(readOnly = true)
-    public Product getById() {
-        return null;
+    public Product getById(long id) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        String hql = "FROM Product P WHERE P.id = :productId";
+        Query query = session.createQuery(hql);
+        query.setParameter("productId", id);
+        Product product = (Product) query.list().get(0);
+        session.getTransaction().commit();
+        return product;
     }
 
     @Override
 //    @Transactional(readOnly = true)
     public List<Product> getAll() {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        final String hql = "FROM Product";
+        Query query = session.createQuery(hql);
+        List<Product> result = query.list();
+        session.getTransaction().commit();
+        return result;
+    }
+
+    @Override
+//    @Transactional(readOnly = true)
+    public List<Product> getByPriceRange(int minPrice, int maxPrice) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        final String hql = "FROM Product P WHERE P.price >= :minPrice AND P.price <= :maxPrice";
+        Query query = session.createQuery(hql).setInteger("minPrice", minPrice).setInteger("maxPrice", maxPrice);
+        List<Product> result = query.list();
+        session.getTransaction().commit();
+        return result;
+    }
+
+    @Override
+//    @Transactional(readOnly = true)
+    public List<Product> getByCategory(String category) {
         return null;
     }
 
     @Override
 //    @Transactional(readOnly = true)
-    public List<Product> getByPriceRange() {
-        return null;
-    }
-
-    @Override
-//    @Transactional(readOnly = true)
-    public List<Product> getByCategory() {
-        return null;
-    }
-
-    @Override
-//    @Transactional(readOnly = true)
-    public List<Product> getByName() {
-        return null;
+    public List<Product> getByName(String name) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        final String hql = "FROM Product P WHERE P.name LIKE :name";
+        Query query = session.createQuery(hql).setString("name", name);
+        List<Product> result = query.list();
+        session.getTransaction().commit();
+        return result;
     }
 
     @Override

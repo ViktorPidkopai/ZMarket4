@@ -12,7 +12,7 @@ import java.util.List;
 
 //@Transactional
 @Repository("productRepository")
-public class ProductRepositoryImpl implements ProductRepository {
+class ProductRepositoryImpl implements ProductRepository {
 
     @Autowired
     private final SessionFactory sessionFactory;
@@ -103,6 +103,11 @@ public class ProductRepositoryImpl implements ProductRepository {
     @Override
 //    @Transactional(readOnly = true)
     public List<String> getCategories() {
-        return null;
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        final String hql = "FROM Category.name ";
+        Query query = session.createQuery(hql);
+        List<String> result = query.list();
+        return result;
     }
 }

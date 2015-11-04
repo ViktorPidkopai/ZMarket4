@@ -46,6 +46,7 @@
         $('#pets').click(function () {
             console.log("PETS btn clicked.");
             $.getJSON("rest/product", function (data) {
+                console.log(data);
                 paintTable(data);
             });
         });
@@ -83,7 +84,7 @@
         console.log("DELETE btn clicked; id = " + id);
         $.ajax({
             type: "DELETE",
-            url: "api/pet/" + id,
+            url: "rest/product/" + id,
             data: id,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -97,6 +98,7 @@
         var name = $('input[name="name"]').val();
         var price = $('input[name="price"]').val();
         var addItem = {
+            category: "test",
             name: name,
             price: price
         };
@@ -104,12 +106,12 @@
         var data = JSON.stringify(addItem);
         $.ajax({
             type: "POST",
-            url: "api/pet",
+            url: "rest/product",
             data: data,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data) {
-                console.log("add - OK + pet = " + JSON.stringify(data));
+                console.log("add - OK + product = " + JSON.stringify(data));
                 refreshTable();
             }
         });
@@ -121,6 +123,7 @@
         var price = $('input[name="edit_price"]').val();
         var updateItem = {
             id: updateItemId,
+            category: "test",
             name: name,
             price: price
         }
@@ -128,7 +131,7 @@
         console.log("update + " + data);
         $.ajax({
             type: "PUT",
-            url: "api/pet",
+            url: "rest/product",
             data: data,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -179,7 +182,7 @@
 
     function refreshTable() {
         console.log("refreshTable() OK");
-        $.getJSON("api/pet", function (data) {
+        $.getJSON("rest/product", function (data) {
             paintTable(data);
         })
     }

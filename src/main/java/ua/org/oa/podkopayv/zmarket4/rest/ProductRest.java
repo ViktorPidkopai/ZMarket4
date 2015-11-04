@@ -1,5 +1,7 @@
 package ua.org.oa.podkopayv.zmarket4.rest;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import ua.org.oa.podkopayv.zmarket4.model.Product;
 import ua.org.oa.podkopayv.zmarket4.repository.ProductRepository;
 import ua.org.oa.podkopayv.zmarket4.repository.StorageRepositories;
@@ -21,7 +23,11 @@ public class ProductRest {
         if (products.isEmpty()) {
             System.out.println("Empty result.");
         } else {
+            System.out.println("Products list:");
             for (Product p : products) {
+                Gson gson = new GsonBuilder().create();
+                String json = gson.toJson(p);
+                System.out.println("REST GSON product = " + json);
                 System.out.println(p);
             }
         }

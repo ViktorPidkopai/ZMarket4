@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import ua.org.oa.podkopayv.zmarket4.model.Product;
 import ua.org.oa.podkopayv.zmarket4.repository.ProductRepository;
-import ua.org.oa.podkopayv.zmarket4.repository.StorageRepositories;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

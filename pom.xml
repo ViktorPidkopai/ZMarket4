@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -38,7 +38,7 @@
 
     <properties>
         <mysql.version>5.1.36</mysql.version>
-        <hibernate.version>5.0.1.Final</hibernate.version>
+        <hibernate.version>4.3.11.Final</hibernate.version>
         <asm.version>3.3.1</asm.version>
         <jersey.version>1.19</jersey.version>
         <spring.version>4.2.2.RELEASE</spring.version>
@@ -129,6 +129,7 @@
             <version>${jackson.version}</version>
         </dependency>
 
+        <!-- Google JSON-->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>

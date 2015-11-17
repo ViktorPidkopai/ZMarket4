@@ -15,6 +15,7 @@ public class Category {
     @Column(name = "name")
     private String title;
 
+    //    @OneToMany(fetch = FetchType.EAGER, mappedBy = "category")
     @OneToMany(mappedBy = "category")
     private Set<Product> products;
 

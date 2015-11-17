@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
        xmlns="http://www.springframework.org/schema/beans"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!--<bean id="sessionFactory"-->
     <!--class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">-->
@@ -11,7 +10,7 @@
     <!--</property>-->
     <!--</bean>-->
 
-    <context:component-scan base-package="ua.org.oa.podkopayv.zmarket4"/>
+    <!--<context:component-scan base-package="ua.org.oa.podkopayv.zmarket4"/>-->
 
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="location">
@@ -26,8 +25,15 @@
         <property name="password" value="${jdbc.password}"/>
     </bean>
 
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
+        <!--<property name="packagesToScan" value="ua.org.oa.podkopayv.zmarket4.model"/>-->
+        <property name="annotatedClasses">
+            <list>
+                <value>ua.org.oa.podkopayv.zmarket4.model.Product</value>
+                <value>ua.org.oa.podkopayv.zmarket4.model.Category</value>
+            </list>
+        </property>
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
@@ -35,8 +41,18 @@
                 <prop key="hibernate.jdbc.fetch_size">50</prop>
                 <prop key="hibernate.jdbc.batch_size">10</prop>
                 <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.current_session_context_class">thread</prop>
             </props>
         </property>
+    </bean>
+
+    <bean id="productRepository" class="ua.org.oa.podkopayv.zmarket4.repository.ProductRepositoryImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="myAutowiredTest" class="ua.org.oa.podkopayv.zmarket4.model.MyAutowiredTest">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="message" value="OK"/>
     </bean>
 
 </beans>

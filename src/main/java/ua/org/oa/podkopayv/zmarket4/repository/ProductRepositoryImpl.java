@@ -11,13 +11,24 @@ import ua.org.oa.podkopayv.zmarket4.model.Product;
 import java.util.List;
 
 //@Transactional
-@Repository("productRepository")
-class ProductRepositoryImpl implements ProductRepository {
+@Repository
+public class ProductRepositoryImpl implements ProductRepository {
 
     @Autowired
-    private final SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
 
     public ProductRepositoryImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+    public ProductRepositoryImpl() {
+    }
+
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
@@ -78,6 +89,10 @@ class ProductRepositoryImpl implements ProductRepository {
         final String hql = "FROM Product P WHERE P.price >= :minPrice AND P.price <= :maxPrice";
         Query query = session.createQuery(hql).setInteger("minPrice", minPrice).setInteger("maxPrice", maxPrice);
         List<Product> result = query.list();
+        System.out.println("Product with price from " + minPrice + " to " + maxPrice);
+        for (Product p : result) {
+            System.out.println(p);
+        }
         session.getTransaction().commit();
         return result;
     }

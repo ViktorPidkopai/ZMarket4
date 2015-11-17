@@ -10,7 +10,6 @@
 
 </head>
 <br/>
-
 <div class="row">
     <div class="col-md-offset-4 col-sm-4">
         <div class="btn-group btn-group-justified" role="group" id="goods_btns">
@@ -26,6 +25,19 @@
         </div>
     </div>
 </div>
+
+<br/>
+
+<form class="form-inline">
+    <div class="form-group">
+        <label for="search" class="col-sm-2 control-label">Search</label>
+
+        <div class="col-sm-10">
+            <input type="search" class="form-control" id="search" placeholder="type text to search">
+        </div>
+    </div>
+</form>
+
 <br/>
 
 <form class="form-inline">
@@ -61,6 +73,7 @@
             var to = document.getElementById("priceToInput").value;
             console.log("PRICE_FILTER btn clicked. from = " + from + "; to = " + to);
         });
+        $('#search').
     });
 
     $(document).on("click", '.edit_btn', function () {

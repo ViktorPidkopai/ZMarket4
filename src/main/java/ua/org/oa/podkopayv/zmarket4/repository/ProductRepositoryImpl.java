@@ -30,6 +30,7 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
+        System.out.println(sessionFactory.isClosed() ? "sessionFactory inject fail" : "sessionFactory succesfully injected");
     }
 
     @Override

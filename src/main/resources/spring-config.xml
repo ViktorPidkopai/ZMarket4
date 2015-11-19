@@ -1,20 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
        xmlns="http://www.springframework.org/schema/beans"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!--<bean id="sessionFactory"-->
-    <!--class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">-->
-    <!--<property name="configLocation">-->
-    <!--<value>file:src/hibernate.cfg.xml</value>-->
-    <!--</property>-->
-    <!--</bean>-->
-
-    <!--<context:component-scan base-package="ua.org.oa.podkopayv.zmarket4"/>-->
+    <context:annotation-config/>
 
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="location">
-            <value>jdbc.properties</value>
+            <value>db.properties</value>
         </property>
     </bean>
 
@@ -49,6 +43,10 @@
     <bean id="productRepository" class="ua.org.oa.podkopayv.zmarket4.repository.ProductRepositoryImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
+
+    <!--<bean id="productRest" class="ua.org.oa.podkopayv.zmarket4.rest.ProductRest" autowire="byName">-->
+    <!--<property name="productRepository" ref="productRepository"/>-->
+    <!--</bean>-->
 
     <bean id="myAutowiredTest" class="ua.org.oa.podkopayv.zmarket4.model.MyAutowiredTest">
         <property name="sessionFactory" ref="sessionFactory"/>

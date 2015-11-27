@@ -30,7 +30,6 @@ public class ProductRest {
     @Produces("application/json")
     public Response getAll() {
         System.out.println("REST getAll()");
-//        ProductRepository productRepository = new ProductRepositoryImpl();
         List<Product> products = productRepository.getAll();
         if (products.isEmpty()) {
             System.out.println("Empty result.");

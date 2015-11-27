@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cart</title>
+
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+<h1>Cart</h1>
+
+<script type="application/javascript">
+
+    $(document).ready(function () {
+        $.getJSON("api/cart", function (data) {
+            console.log(data);
+            paintTable(data);
+            totalAmount();
+        });
+    });
+
+    function totalAmount() {
+        $.ajax({
+            type: "GET",
+            url: "api/cart/" + 0,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                document.getElementById('totalAmount').innerHTML = "Total amount: " + data / 100;
+            }
+        });
+    }
+
+    function paintTable(data) {
+        var tableHead = '<thead><tr><th>' + 'id' + '</th>' +
+                '<th>' + 'Name' + '</th>' +
+                '<th>' + 'Price' + '</th>' +
+                '<th>' + 'Quantity' + '</th>' +
+                '<th>' + 'Actions' + '</th></tr></thead><tbody>';
+        var tableBody = '';
+        $.each(data, function (key, value) {
+            console.log("key = " + key);
+            console.log("keyID = " + key.id);
+            console.log("keyNAME = " + key.name);
+            console.log("keyPRICE = " + key.price);
+            console.log("value = " + value);
+            tableBody += '<tr><td>' + key.id + '</td>' +
+                    '<td>' + key.name + '</td>' +
+                    '<td>' + key.price / 100 + '</td>' +
+                    '<td>' + value + '</td>' +
+                    '<td><button type="button" class="btn btn-primary btn-xs add_to_cart_btn" id = "' + key.id + '">Delete</button></td></tr>';
+        });
+        $('#mainTable').html('');
+        $('#mainTable').append(tableHead);
+        $('#mainTable').append(tableBody);
+        console.log("paintTable() OK");
+    }
+
+</script>
+
+<div class="container-fluid">
+    <div class="col-md-offset-2 col-sm-8">
+        <table class="table table-bordered" id="mainTable"></table>
+    </div>
+</div>
+<div id='totalAmount'></div>
+</body>
+</html>

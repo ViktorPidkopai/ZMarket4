@@ -1,5 +1,6 @@
 package ua.org.oa.podkopayv.zmarket4.repository;
 
+import ua.org.oa.podkopayv.zmarket4.model.Category;
 import ua.org.oa.podkopayv.zmarket4.model.Product;
 
 import java.util.List;
@@ -12,7 +13,8 @@ public interface ProductRepository {
     Product getById(long id);
     List<Product> getAll();
     List<Product> getByPriceRange(int minPrice, int maxPrice);
-    List<Product> getByCategory(String category);
+
+    List<Product> getByCategory(Category category);
     List<Product> getByName(String name);
     List<String> getCategories();
 

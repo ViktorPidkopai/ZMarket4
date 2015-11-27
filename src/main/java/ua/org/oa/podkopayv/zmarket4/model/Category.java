@@ -12,11 +12,11 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "name")
+    @Column(name = "title")
     private String title;
 
     //    @OneToMany(fetch = FetchType.EAGER, mappedBy = "category")
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
     private Set<Product> products;
 
     public Category() {}
@@ -29,12 +29,12 @@ public class Category {
         this.id = id;
     }
 
-    public String getName() {
+    public String getTitle() {
         return title;
     }
 
-    public void setName(String name) {
-        this.title = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Set<Product> getProducts() {

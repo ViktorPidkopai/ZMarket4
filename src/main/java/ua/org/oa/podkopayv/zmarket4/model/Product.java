@@ -11,7 +11,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
     private Category category;
 
@@ -36,6 +36,10 @@ public class Product {
     }
 
     public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public void setCategory() {
         this.category = category;
     }
 

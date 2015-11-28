@@ -20,17 +20,6 @@ public class ProductRepositoryImpl implements ProductRepository {
     @Autowired
     private SessionFactory sessionFactory;
 
-    public ProductRepositoryImpl(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
-
-    public ProductRepositoryImpl() {
-    }
-
-    public SessionFactory getSessionFactory() {
-        return sessionFactory;
-    }
-
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }

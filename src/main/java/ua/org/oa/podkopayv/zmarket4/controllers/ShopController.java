@@ -17,6 +17,10 @@ public class ShopController {
     @Autowired
     private ProductRepository productRepository;
 
+    public void setProductRepository(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
+
     @RequestMapping(produces = "application/json", method = RequestMethod.GET)
     public
     @ResponseBody
